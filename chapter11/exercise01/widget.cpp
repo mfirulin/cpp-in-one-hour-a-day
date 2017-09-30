@@ -13,23 +13,24 @@ Widget::Widget(QWidget *parent)
 
 Widget::~Widget()
 {
-    delete shape;
+
 }
 
 void Widget::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
 
-    shape = new Triangle(QPoint(10, 10), QPoint(110, 10), QPoint(50, 100));
-    qDebug() << shape->area();
-    shape->print(painter);
-    delete shape;
+    Shape* shape1 = new Triangle(QString("Triangle"), QPoint(10, 10), QPoint(110, 10), QPoint(60, 100));
+    Shape* shape2 = new Circle(QString("Circle"), QPoint(150, 150), 50);
 
-    shape = new Circle(QPoint(200, 200), 50);
-    qDebug() << shape->area();
-    shape->print(painter);
-    delete shape;
-    shape = nullptr;
+    qDebug() << shape1->name() << shape1->area();
+    qDebug() << shape2->name() << shape2->area();
+
+    shape1->print(painter);
+    shape2->print(painter);
+
+    delete shape1;
+    delete shape2;
 
     painter.end();
 }

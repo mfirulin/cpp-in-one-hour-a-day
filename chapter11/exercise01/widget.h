@@ -3,8 +3,6 @@
 
 #include <QWidget>
 
-class Shape;
-
 class Widget : public QWidget
 {
     Q_OBJECT
@@ -14,7 +12,6 @@ public:
     ~Widget();
 
 private:
-    Shape* shape;
     void paintEvent(QPaintEvent*);
 };
 

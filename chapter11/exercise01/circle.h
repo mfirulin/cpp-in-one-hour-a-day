@@ -7,10 +7,11 @@
 class Circle : public Shape
 {
 public:
-    Circle(const QPoint& center, double radius);
+    Circle(const QString& name, const QPoint& center, double radius);
     double area() const;
     void print(QPainter& painter) const;
     ~Circle();
+
 private:
     QPoint m_center;
     double m_radius;

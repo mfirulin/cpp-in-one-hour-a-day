@@ -3,8 +3,8 @@
 #include <QtMath>
 #include <QPainter>
 
-Circle::Circle(const QPoint &center, double radius) :
-    m_center(center), m_radius(radius)
+Circle::Circle(const QString& name, const QPoint& center, double radius) :
+    Shape(name), m_center(center), m_radius(radius)
 {
 
 }
@@ -21,5 +21,6 @@ double Circle::area() const
 
 void Circle::print(QPainter& painter) const
 {
-    painter.drawEllipse(m_center, qRound(m_radius), qRound(m_radius));
+    int radius = qRound(m_radius);
+    painter.drawEllipse(m_center, radius, radius);
 }

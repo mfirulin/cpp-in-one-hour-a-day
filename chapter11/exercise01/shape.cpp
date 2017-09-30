@@ -1,6 +1,7 @@
 #include "shape.h"
+#include <QDebug>
 
-Shape::Shape()
+Shape::Shape(const QString& name) : m_name(name)
 {
 
 }
@@ -8,4 +9,9 @@ Shape::Shape()
 Shape::~Shape()
 {
 
+}
+
+const QString& Shape::name() const
+{
+    return m_name;
 }
