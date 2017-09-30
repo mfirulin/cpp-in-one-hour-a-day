@@ -1,5 +1,4 @@
 #include "shape.h"
-#include <QDebug>
 
 Shape::Shape(const QString& name) : m_name(name)
 {
