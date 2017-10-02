@@ -7,6 +7,7 @@ class String
     int m_len;
     
 public:
+    String();
     String(const char* str);
     String(const String& other);
     String(String&& other);
@@ -18,6 +19,10 @@ public:
     int length() const;
     const char* string() const;
 };
+
+String::String() : m_str(nullptr), m_len(0)
+{
+}
 
 String::String(const char* str) : m_str(nullptr), m_len(0)
 {
@@ -124,14 +129,18 @@ int main()
     String str1(str);
     std::cout << "str1: " << str1.length() << " " << str1.string() << std::endl;
     
-    String str2(str);
+    String str2(str1);
     std::cout << "str2: " << str2.length() << " " << str2.string() << std::endl;
     
-    String str3 = str2;
+    String str3;
+    str3 = str2;
     std::cout << "str3: " << str3.length() << " " << str3.string() << std::endl;
     
-    String str4 = copy_string(str3);
+    String str4(copy_string(str3));
     std::cout << "str4: " << str4.length() << " " << str4.string() << std::endl;
+    
+    String str5;
+    std::cout << "str5: " << str5.length() << std::endl;
     
     return 0;
 }
