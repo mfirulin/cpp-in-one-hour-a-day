@@ -15,6 +15,7 @@ public:
     
     String& operator=(const String& other);
     String& operator=(String&& other);
+    operator const char*();
     
     int length() const;
     const char* string() const;
@@ -106,6 +107,11 @@ String& String::operator=(String&& other)
     return *this;    
 }
 
+String::operator const char*()
+{
+    return m_str;
+}
+
 const char* String::string() const
 {
     return m_str;
@@ -127,17 +133,17 @@ int main()
     char str[] = "Hello, World!";
     
     String str1(str);
-    std::cout << "str1: " << str1.length() << " " << str1.string() << std::endl;
+    std::cout << "str1: " << str1.length() << " " << str1 << std::endl;
     
     String str2(str1);
-    std::cout << "str2: " << str2.length() << " " << str2.string() << std::endl;
+    std::cout << "str2: " << str2.length() << " " << str2 << std::endl;
     
     String str3;
     str3 = str2;
-    std::cout << "str3: " << str3.length() << " " << str3.string() << std::endl;
+    std::cout << "str3: " << str3.length() << " " << str3 << std::endl;
     
     String str4(copy_string(str3));
-    std::cout << "str4: " << str4.length() << " " << str4.string() << std::endl;
+    std::cout << "str4: " << str4.length() << " " << str4 << std::endl;
     
     String str5;
     std::cout << "str5: " << str5.length() << std::endl;
