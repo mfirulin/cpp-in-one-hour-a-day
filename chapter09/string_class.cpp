@@ -16,6 +16,11 @@ public:
     String& operator=(const String& other);
     String& operator=(String&& other);
     operator const char*();
+    String operator+(const String& other);
+    void operator+=(const String& other);
+    bool operator==(const String& other);
+    bool operator!=(const String& other);
+    const char operator[](int index) const;
     
     int length() const;
     const char* string() const;
@@ -112,6 +117,52 @@ String::operator const char*()
     return m_str;
 }
 
+String String::operator+(const String& other)
+{
+    int len = m_len + other.m_len;
+    String str;    
+    str.m_str = new(std::nothrow) char[len + 1];
+    if(str.m_str) {
+        strncpy(str.m_str, m_str, m_len);
+        if(other.m_str)
+            strncat(str.m_str, other.m_str, other.m_len);
+       str.m_len = len;
+    }
+    return str;
+}
+
+void String::operator+=(const String& other)
+{
+    int len = m_len + other.m_len;    
+    char* str = new(std::nothrow) char[len + 1];
+    if(str) {
+        strncpy(str, m_str, m_len);
+        if(other.m_str)
+            strncat(str, other.m_str, other.m_len);
+        delete[] m_str;
+        m_str = str;
+        m_len = len;
+    }
+}
+
+bool String::operator==(const String& other)
+{
+    return strncmp(m_str, other.m_str, m_len) == 0;
+}
+
+bool String::operator!=(const String& other)
+{
+    return !operator==(other);
+}
+
+const char String::operator[](int index) const
+{
+    if(0 <= index && index < m_len)
+        return m_str[index];
+        
+    return '\0';
+}
+
 const char* String::string() const
 {
     return m_str;
@@ -132,6 +183,9 @@ int main()
 {   
     char str[] = "Hello, World!";
     
+    String str0;
+    std::cout << "str0: " << str0.length() << std::endl;
+    
     String str1(str);
     std::cout << "str1: " << str1.length() << " " << str1 << std::endl;
     
@@ -142,11 +196,24 @@ int main()
     str3 = str2;
     std::cout << "str3: " << str3.length() << " " << str3 << std::endl;
     
-    String str4(copy_string(str3));
+    String str4;
+    str4 = copy_string(str3);
     std::cout << "str4: " << str4.length() << " " << str4 << std::endl;
     
+    String hello("Hello, ");
+    String world("World!");
     String str5;
-    std::cout << "str5: " << str5.length() << std::endl;
+    str5 = hello + world;
+    std::cout << "str5: " << str5.length() << " " << str5 << std::endl;
+    
+    hello += world;
+    std::cout << "hello: " << hello.length() << " " << hello << std::endl;
+    
+    std::cout << (hello == hello) << " " << (hello != hello) << std::endl;
+    
+    for(int i = 0; i < str5.length(); ++i)
+        std::cout << str5[i] << " ";
+    std::cout << std::endl;
     
     return 0;
 }
