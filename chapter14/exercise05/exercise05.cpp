@@ -3,7 +3,7 @@
 template <typename T1, typename T2>
 class Template_class
 {
-    static constexpr int m_size = 10;
+    static const int m_size = 10;
     T1 m_a1[m_size];
     T2 m_a2[m_size];
 
