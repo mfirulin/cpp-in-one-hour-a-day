@@ -8,7 +8,6 @@ int main()
     
     std::string str;
     std::cin >> str;
-//    std::getline(std::cin, str);
     
     std::string str_copy(str);
     
@@ -20,5 +19,6 @@ int main()
         std::cout << "it is not a palindrome: ";
     
     std::cout << str << " " << str_copy << std::endl;
+    
     return 0;
 }
