@@ -15,11 +15,11 @@ public:
     
     String& operator=(const String& other);
     String& operator=(String&& other);
-    operator const char*();
-    String operator+(const String& other);
+    operator const char*() const;
+    String operator+(const String& other) const;
     void operator+=(const String& other);
-    bool operator==(const String& other);
-    bool operator!=(const String& other);
+    bool operator==(const String& other) const;
+    bool operator!=(const String& other) const;
     const char operator[](int index) const;
     
     int length() const;
@@ -112,12 +112,12 @@ String& String::operator=(String&& other)
     return *this;    
 }
 
-String::operator const char*()
+String::operator const char*() const
 {
     return m_str;
 }
 
-String String::operator+(const String& other)
+String String::operator+(const String& other) const
 {
     int len = m_len + other.m_len;
     String str;    
@@ -145,12 +145,12 @@ void String::operator+=(const String& other)
     }
 }
 
-bool String::operator==(const String& other)
+bool String::operator==(const String& other) const
 {
     return strncmp(m_str, other.m_str, m_len) == 0;
 }
 
-bool String::operator!=(const String& other)
+bool String::operator!=(const String& other) const
 {
     return !operator==(other);
 }
